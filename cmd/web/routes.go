@@ -1,9 +1,10 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/simonroge/bookings/pkg/config"
 	"github.com/simonroge/bookings/pkg/handlers"
-	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -18,6 +19,16 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/", handlers.Repo.Home)
 	mux.Get("/about", handlers.Repo.About)
+	mux.Get("/generals", handlers.Repo.Generals)
+	mux.Get("/majors", handlers.Repo.Majors)
+	mux.Get("/reservation", handlers.Repo.Reservation)
+	mux.Post("/reservation", handlers.Repo.PostReservation)
+	mux.Get("/contact", handlers.Repo.Contact)
+	mux.Get("/make-reservation", handlers.Repo.MakeReservation)
+
+
+	mux.Get("/reservation-json", handlers.Repo.AvaibiliteJSON)
+	
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 
